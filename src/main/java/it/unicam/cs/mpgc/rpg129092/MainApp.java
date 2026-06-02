@@ -17,7 +17,7 @@ public class MainApp extends Application {
         Button button = new Button("Cliccami");
 
         //evetno di test
-        button.setOnAction(event -> label.setText("Fin qua torna tutto"));
+        button.setOnAction(event -> label.setText("Gira tutto, sei un grande"));
 
 
         // setup elementi

@@ -7,13 +7,12 @@ group = "it.unicam.cs.mpgc"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    mavenCentral() // Questo dice a Gradle dove scaricare JavaFX e JUnit
+    mavenCentral()
 }
 
 dependencies {
-    // Specifichiamo la tua piattaforma (windows, mac, o linux)
     val javafxVersion = "21"
-    val platform = "win" // Cambia in "mac" se sei su Mac o "linux" se sei su Linux
+    val platform = "win"
 
     // Importiamo i moduli di JavaFX come normali librerie
     implementation("org.openjfx:javafx-controls:$javafxVersion:$platform")
@@ -30,7 +29,6 @@ dependencies {
 }
 
 application {
-    // Sostituisci '123456' con la tua MATRICOLA reale
     mainClass.set("it.unicam.cs.mpgc.rpg129092.Main")
 }
 
