@@ -1,4 +1,7 @@
 package it.unicam.cs.mpgc.rpg129092.model;
+import it.unicam.cs.mpgc.rpg129092.model.characters.Enemy;
+import it.unicam.cs.mpgc.rpg129092.model.characters.Hero;
+
 import java.util.List;
 
 

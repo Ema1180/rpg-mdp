@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg129092.controller;
+package it.unicam.cs.mpgc.rpg129092.controller.saving;
 import it.unicam.cs.mpgc.rpg129092.model.GameState;
 import java.io.IOException;
 

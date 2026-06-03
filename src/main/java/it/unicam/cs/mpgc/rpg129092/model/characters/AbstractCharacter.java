@@ -1,13 +1,15 @@
-package it.unicam.cs.mpgc.rpg129092.model;
+package it.unicam.cs.mpgc.rpg129092.model.characters;
 
-public abstract class AbstractCharacter implements GameEntity{
+public abstract class AbstractCharacter implements GameEntity {
     protected String name;
     protected int health;
+    protected int maxHealth;
     protected int attackpower;
 
-    public AbstractCharacter (String name, int health, int attackpower) {
+    public AbstractCharacter (String name, int maxHealth, int attackpower) {
         this.name = name;
-        this.health = health;
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
         this.attackpower = attackpower;
     }
 
@@ -22,11 +24,19 @@ public abstract class AbstractCharacter implements GameEntity{
     }
 
     @Override
+    public int getMaxHealth() {return maxHealth;}
+
+    @Override
     public void takeDamage(int damage) {
         health -= damage;
         if (health <= 0) {
             health = 0;
         }
+    }
+
+    @Override
+    public void setHP(int hp) {
+        health = hp;
     }
 
     @Override

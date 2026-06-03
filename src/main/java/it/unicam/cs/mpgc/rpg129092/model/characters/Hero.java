@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg129092.model;
+package it.unicam.cs.mpgc.rpg129092.model.characters;
 
 public class Hero extends AbstractCharacter {
     private int experience;
@@ -21,7 +21,8 @@ public class Hero extends AbstractCharacter {
 
     public void checklevelUp() {
         this.level++;
-        health += 25;
+        maxHealth += 25;
         attackpower += 10;
     }
+
 }

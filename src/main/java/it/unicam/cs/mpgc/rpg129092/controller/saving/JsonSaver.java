@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg129092.controller;
+package it.unicam.cs.mpgc.rpg129092.controller.saving;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.unicam.cs.mpgc.rpg129092.model.GameState;

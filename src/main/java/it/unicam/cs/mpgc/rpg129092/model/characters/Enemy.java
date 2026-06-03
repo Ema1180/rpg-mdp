@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg129092.model;
+package it.unicam.cs.mpgc.rpg129092.model.characters;
 
 public class Enemy extends AbstractCharacter {
     private int expreward;
