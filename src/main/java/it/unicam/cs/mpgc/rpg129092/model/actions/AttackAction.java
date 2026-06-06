@@ -8,6 +8,6 @@ public class AttackAction implements CombatAction {
         int damage = caster.getAttackpower();
         target.takeDamage(damage);
 
-        return caster.getName() + "ha attaccato " + target.getName() + "infliggendo " + damage + "danni";
+        return caster.getName() + " ha attaccato " + target.getName() + " infliggendo " + damage + " danni";
     }
 }

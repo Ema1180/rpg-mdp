@@ -5,8 +5,8 @@ import it.unicam.cs.mpgc.rpg129092.model.characters.Hero;
 
 public class CureAction implements CombatAction {
     public String execute(AbstractCharacter caster, AbstractCharacter target) {
-        target.setHP(target.getMaxHealth()/10);
+        caster.setHP(caster.getHealth() + caster.getMaxHealth()/10);
 
-        return caster.getName() + "fa un incantesimo curativo ";
+        return caster.getName() + " fa un incantesimo curativo ";
     }
 }
