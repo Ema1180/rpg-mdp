@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg129092.controller.scene;
 
-import it.unicam.cs.mpgc.rpg129092.controller.battle.BattleFXController;
+import it.unicam.cs.mpgc.rpg129092.model.GameState;
+import it.unicam.cs.mpgc.rpg129092.view.BattleFXController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -60,6 +61,20 @@ public class SceneController {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void navigateToEnemySelection(GameState gameState) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EnemySelection.fxml"));
+            Parent root = loader.load();
+
+            EnemySelectionController controller = loader.getController();
+            controller.setGameState(gameState);
+
+            primaryStage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
         }

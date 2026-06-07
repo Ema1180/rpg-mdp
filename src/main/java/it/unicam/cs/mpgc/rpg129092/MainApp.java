@@ -15,16 +15,12 @@ public class MainApp extends Application {
         SceneController.getInstance().init(primaryStage);
         primaryStage.setTitle("RPG - Test Combattimento");
 
-        // 2. Creiamo i dati di TEST (Model)
-        // Ipotizziamo: Nome, MaxHP, Attacco, Difesa
         Hero testHero = new Hero("Geralt");
-        Enemy testEnemy = new Enemy("Skullface", 80, 18, 5);
+        Enemy testEnemy = new Enemy("Goblin", 80, 18, 5);
 
-        // 3. Istanziamo il motore logico del combattimento
         BattleController testEngine = new BattleController(testHero, testEnemy);
 
-        // 4. Diciamo allo SceneManager di caricare direttamente la battaglia
-        // Passando il motore logico appena creato
+        // 4. Diciamo allo SceneManager di caricare direttamente la battagliadsew
         SceneController.getInstance().startBattle(testEngine);
     }
 

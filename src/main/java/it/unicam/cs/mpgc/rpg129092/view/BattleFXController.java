@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg129092.controller.battle;
+package it.unicam.cs.mpgc.rpg129092.view;
 
 import it.unicam.cs.mpgc.rpg129092.model.actions.CombatAction;
 import javafx.animation.PauseTransition;
@@ -18,12 +18,17 @@ public class BattleFXController {
     @FXML private Label logLabel;
     @FXML private Button attackButton;
     @FXML private Button healButton;
+    @FXML private Label heroName;
+    @FXML private Label enemyName;
 
     private BattleController battleEngine;
 
     public void setBattleEngine(BattleController battleEngine) {
         this.battleEngine = battleEngine;
         updateUI(battleEngine.getEnemy().getName() + " ha voglia di botte!");
+        heroName.setText(battleEngine.getHero().getName());
+        enemyName.setText(battleEngine.getEnemy().getName());
+
     }
 
     @FXML
@@ -60,7 +65,7 @@ public class BattleFXController {
 
             // Controlla se il nemico ha vinto
             if (battleEngine.isBattleOver()) {
-                endMatch("Anche oggi vince il sionismo...");
+                endMatch("Oggi vince il male...");
             } else {
                 // Riapri i controlli per il nuovo turno dell'eroe
                 setControlsDisabled(false);
