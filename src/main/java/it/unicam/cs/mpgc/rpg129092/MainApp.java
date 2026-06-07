@@ -16,7 +16,7 @@ public class MainApp extends Application {
         primaryStage.setTitle("RPG - Test Combattimento");
 
         Hero testHero = new Hero("Geralt");
-        Enemy testEnemy = new Enemy("Goblin", 80, 18, 5);
+        Enemy testEnemy = new Enemy("Goblin", 80, 18);
 
         BattleController testEngine = new BattleController(testHero, testEnemy);
 
