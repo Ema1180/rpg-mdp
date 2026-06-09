@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpg129092.controller.battle;
 import it.unicam.cs.mpgc.rpg129092.model.actions.AttackAction;
 import it.unicam.cs.mpgc.rpg129092.model.characters.AbstractCharacter;
 import it.unicam.cs.mpgc.rpg129092.model.actions.CombatAction;
+import it.unicam.cs.mpgc.rpg129092.model.characters.Hero;
 
 public class BattleController {
     public enum BattleState {
@@ -12,11 +13,11 @@ public class BattleController {
         DEFEAT
     }
 
-    private final AbstractCharacter hero;
+    private final Hero hero;
     private final AbstractCharacter enemy;
     private BattleState currentState;
 
-    public BattleController(AbstractCharacter hero, AbstractCharacter enemy) {
+    public BattleController(Hero hero, AbstractCharacter enemy) {
         this.hero = hero;
         this.enemy = enemy;
         this.currentState = BattleState.HERO_TURN; // Inizia l'eroe di default
@@ -36,6 +37,7 @@ public class BattleController {
         // Verifica lo stato del combattimento
         if (enemy.isDead()) {
             currentState = BattleState.VICTORY;
+            hero.levelUp();
             return logResult + "\n" + enemy.getName() + " è stato gonfiato di botte! ";
         }
 

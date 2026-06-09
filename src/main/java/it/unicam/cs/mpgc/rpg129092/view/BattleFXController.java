@@ -1,6 +1,9 @@
 package it.unicam.cs.mpgc.rpg129092.view;
 
+import it.unicam.cs.mpgc.rpg129092.controller.scene.SceneController;
+import it.unicam.cs.mpgc.rpg129092.model.GameState;
 import it.unicam.cs.mpgc.rpg129092.model.actions.CombatAction;
+import it.unicam.cs.mpgc.rpg129092.model.characters.Hero;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,14 +25,7 @@ public class BattleFXController {
     @FXML private Label enemyName;
 
     private BattleController battleEngine;
-
-    public void setBattleEngine(BattleController battleEngine) {
-        this.battleEngine = battleEngine;
-        updateUI(battleEngine.getEnemy().getName() + " ha voglia di botte!");
-        heroName.setText(battleEngine.getHero().getName());
-        enemyName.setText(battleEngine.getEnemy().getName());
-
-    }
+    private GameState gameState;
 
     @FXML
     public void onAttackClick() {
@@ -44,17 +40,17 @@ public class BattleFXController {
     private void processHeroTurn(CombatAction action) {
         if (!battleEngine.isHeroTurn() || battleEngine.isBattleOver()) return;
 
-        // 1. Esegui la mossa dell'eroe
+        // Esegue la mossa dell'eroe
         String result = battleEngine.handleHeroAction(action);
         updateUI(result);
 
-        // 2. Controlla se l'eroe ha vinto
+        // Controlla se l'eroe ha vinto
         if (battleEngine.isBattleOver()) {
-            endMatch("VITTORIA! Hai riconquistato Gerusalemme");
+            endMatch("VITTORIA!");
             return;
         }
 
-        // 3. Disabilita l'input e passa il turno al nemico con un delay di 1.5 secondi
+        // 3. Disabilita l'input e passa il turno al nemico
         setControlsDisabled(true);
 
         PauseTransition enemyDelay = new PauseTransition(Duration.seconds(3.0));
@@ -75,6 +71,14 @@ public class BattleFXController {
         enemyDelay.play();
     }
 
+    public void setBattleContext(BattleController engine, GameState gameState) {
+        this.battleEngine = engine;
+        this.gameState = gameState;
+        updateUI(battleEngine.getEnemy().getName() + " ha voglia di botte!");
+        heroName.setText(battleEngine.getHero().getName());
+        enemyName.setText(battleEngine.getEnemy().getName());
+    }
+
     private void updateUI(String logMessage) {
         logLabel.setText(logMessage);
 
@@ -83,6 +87,17 @@ public class BattleFXController {
 
         heroHpBar.setProgress(heroProgress);
         enemyHpBar.setProgress(enemyProgress);
+
+        if (battleEngine.getCurrentState() == BattleController.BattleState.VICTORY) {
+            // Dopo 3 secondi dalla vittoria, torna automaticamente alla selezione nemici
+            PauseTransition returnDelay = new PauseTransition(Duration.seconds(3.0));
+            returnDelay.setOnFinished(event -> {
+                // Passiamo l'eroe (castato da AbstractCharacter) allo SceneManager
+                Hero currentHero = (Hero) battleEngine.getHero();
+                SceneController.getInstance().navigateToEnemySelection(gameState);
+            });
+            returnDelay.play();
+        }
     }
 
     private void setControlsDisabled(boolean disabled) {

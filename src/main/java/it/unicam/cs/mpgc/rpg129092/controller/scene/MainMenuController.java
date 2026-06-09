@@ -31,7 +31,7 @@ public class MainMenuController {
     }
 
     @FXML
-    private void onNewGameButtonClick() {
+    private void onNewGameClick() {
         Hero eroe = new Hero("Geralt");
 
         GameState gameState = new GameState(eroe);
@@ -40,7 +40,7 @@ public class MainMenuController {
     }
 
     @FXML
-    private void onContinueButtonClick() {
+    private void onContinueClick() {
         try {
             GameState gameState = gameSaver.load(savePath);
 

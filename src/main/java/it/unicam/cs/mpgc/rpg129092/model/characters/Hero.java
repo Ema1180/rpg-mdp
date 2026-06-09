@@ -5,7 +5,7 @@ public class Hero extends AbstractCharacter {
     private int level;
 
     public Hero(String name) {
-        super(name, 100, 25);
+        super(name, 100, 35);
         this.experience = 0;
         this.level = 1;
     }
@@ -15,11 +15,7 @@ public class Hero extends AbstractCharacter {
         target.takeDamage(this.attackpower);
     }
 
-    public void gainExperience(int experience) {
-        this.experience += experience;
-    }
-
-    public void checklevelUp() {
+    public void levelUp() {
         this.level++;
         maxHealth += 25;
         attackpower += 10;

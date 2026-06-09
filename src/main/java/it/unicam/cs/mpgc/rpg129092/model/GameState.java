@@ -18,9 +18,9 @@ public class GameState {
     }
 
     public void enemyList() {
-        remainingEnemies.add(new Enemy("Re Goblin", 180, 25));
-        remainingEnemies.add(new Enemy("Demone maggiore", 350, 40));
-        remainingEnemies.add(new Enemy("Balrog", 450, 50));
+        remainingEnemies.add(new Enemy("Re Goblin", 180, 15));
+        remainingEnemies.add(new Enemy("Demone maggiore", 250, 25));
+        remainingEnemies.add(new Enemy("Balrog", 350, 35));
     }
 
     public void removeEnemy(Enemy enemy) {
@@ -29,6 +29,10 @@ public class GameState {
                 remainingEnemies.remove(i);
             }
         }
+    }
+
+    public List<Enemy> getRemainingEnemies() {
+        return remainingEnemies;
     }
 
     public Hero getHero() {
