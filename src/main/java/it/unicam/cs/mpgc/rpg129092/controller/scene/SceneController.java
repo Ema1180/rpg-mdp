@@ -21,9 +21,13 @@ public class SceneController {
 
     public void init(Stage stage) { this.primaryStage = stage; }
 
+
+    /**
+     * Apre il menu principale all'avvio del gioco
+     */
     public void showMainMenu() {
         try {
-            // Carica l'FXML dedicato al menu principale
+            // Carica l'FXML del menu principale
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainMenu.fxml"));
             Parent root = loader.load();
 
@@ -38,18 +42,22 @@ public class SceneController {
     }
 
     /**
-     * Avvia la battaglia passando il GameState (Model globale)
+     * Passo all'interfaccia di combattimento mantenendo lo stato di gioco
+     * @param gameState
+     * @param enemy
      */
     public void startBattle(GameState gameState, AbstractCharacter enemy) {
         try {
+            //Imposta l'FXML dell'interfaccia di combattimento
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/BattleScreen.fxml"));
             Parent root = loader.load();
 
-            // Ipotizzo che nel tuo GameState ci sia un metodo getHero()
+            //Imposto la logica di combattimento
             BattleController engine = new BattleController(gameState.getHero(), enemy);
 
             BattleFXController controller = loader.getController();
-            // Passiamo sia il motore di battaglia sia lo stato globale al controller grafico
+
+            // Passo sia il motore di battaglia sia lo stato di gioco
             controller.setBattleContext(engine, gameState);
 
             primaryStage.setScene(new Scene(root));
@@ -59,15 +67,17 @@ public class SceneController {
     }
 
     /**
-     * Torna indietro portando il GameState aggiornato
+     * Passo al menu di selezione del nemico dopo un combattimento
+     * @param gameState
      */
     public void navigateToEnemySelection(GameState gameState) {
         try {
+            //Carico l'FXML del menu di selezione
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EnemySelection.fxml"));
             Parent root = loader.load();
 
             EnemySelectionController controller = loader.getController();
-            controller.setGameState(gameState); // Re-iniettiamo lo stato modificato
+            controller.setGameState(gameState); //Aggiorno lo stato di gioco globale
 
             primaryStage.setScene(new Scene(root));
         } catch (IOException e) {

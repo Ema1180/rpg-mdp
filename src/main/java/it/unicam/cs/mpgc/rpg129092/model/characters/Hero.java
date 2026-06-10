@@ -18,6 +18,7 @@ public class Hero extends AbstractCharacter {
     public void levelUp() {
         this.level++;
         maxHealth += 25;
+        this.setHP(this.getMaxHealth());
         attackpower += 10;
     }
 

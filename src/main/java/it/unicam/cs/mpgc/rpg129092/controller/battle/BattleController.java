@@ -24,20 +24,20 @@ public class BattleController {
     }
 
     /**
-     * Il giocatore (o la View per lui) invoca questo metodo passando l'azione scelta.
+     * Il giocatore invoca questo metodo passando l'azione scelta.
      */
     public String handleHeroAction(CombatAction action) {
         if (currentState != BattleState.HERO_TURN) {
             return "Non è il tuo turno!";
         }
 
-        // Esegui l'azione sul nemico
+        // Eseguo l'azione sul nemico
         String logResult = action.execute(hero, enemy);
 
-        // Verifica lo stato del combattimento
+        // Verifico lo stato del combattimento
         if (enemy.isDead()) {
             currentState = BattleState.VICTORY;
-            hero.levelUp();
+            hero.levelUp(); //Faccio salire di livello il giocatore dopo ogni combattimento vinto per semplicità
             return logResult + "\n" + enemy.getName() + " è stato gonfiato di botte! ";
         }
 
@@ -53,7 +53,7 @@ public class BattleController {
         if (currentState != BattleState.ENEMY_TURN) {
             return "Non è il turno del nemico!";
         }
-        // Semplice IA: Il nemico attacca sempre (in futuro si potrebbero aggiungere altre possibilità)
+        // Il nemico attacca sempre (in futuro si potrebbero aggiungere altre possibilità)
         CombatAction enemyAction = new AttackAction();
         String logResult = enemyAction.execute(enemy, hero);
 
@@ -66,7 +66,7 @@ public class BattleController {
         return logResult;
     }
 
-    // Getters di stato utili sia per i test che per la futura UI
+    // Getters di stato
     public BattleState getCurrentState() { return currentState; }
     public AbstractCharacter getHero() { return hero; }
     public AbstractCharacter getEnemy() { return enemy; }

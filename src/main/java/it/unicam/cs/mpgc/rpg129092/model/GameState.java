@@ -18,7 +18,7 @@ public class GameState {
     }
 
     public void enemyList() {
-        remainingEnemies.add(new Enemy("Re Goblin", 180, 15));
+        remainingEnemies.add(new Enemy("Re Goblin", 190, 15));
         remainingEnemies.add(new Enemy("Demone maggiore", 250, 25));
         remainingEnemies.add(new Enemy("Balrog", 350, 35));
     }

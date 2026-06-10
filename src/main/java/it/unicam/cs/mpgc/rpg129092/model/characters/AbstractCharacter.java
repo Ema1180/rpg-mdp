@@ -49,8 +49,4 @@ public abstract class AbstractCharacter implements GameEntity {
     }
 
     public abstract void attack(GameEntity target);
-
-
-
-
 }

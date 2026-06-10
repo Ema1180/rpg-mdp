@@ -10,4 +10,9 @@ public class Enemy extends AbstractCharacter {
     public void attack(GameEntity target) {
         target.takeDamage(attackpower);
     }
+
+    @Override
+    public String toString() {
+        return this.getName() + " ATK: " + this.getAttackpower();
+    }
 }
