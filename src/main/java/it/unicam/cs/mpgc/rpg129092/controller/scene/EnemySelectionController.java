@@ -38,12 +38,12 @@ public class EnemySelectionController {
         if (gameState != null) {
             // Prendiamo la lista dei superstiti dal Model e la impacchettiamo per JavaFX
             ObservableList<AbstractCharacter> observableEnemies =
-                    FXCollections.observableArrayList(gameState.getRemainingEnemies());
+                    FXCollections.observableArrayList(gameState.getEnemies());
 
             enemyListView.setItems(observableEnemies);
 
             // Controllo extra: se non ci sono più nemici, l'utente ha vinto il gioco!
-            if (gameState.getRemainingEnemies().isEmpty()) {
+            if (gameState.getEnemies().isEmpty()) {
                 // Gestisci la vittoria totale del gioco (es. mostra un messaggio o i crediti)
             }
         }
