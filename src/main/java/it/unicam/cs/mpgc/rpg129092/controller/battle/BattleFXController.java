@@ -1,16 +1,14 @@
-package it.unicam.cs.mpgc.rpg129092.view;
+package it.unicam.cs.mpgc.rpg129092.controller.battle;
 
 import it.unicam.cs.mpgc.rpg129092.controller.scene.SceneController;
 import it.unicam.cs.mpgc.rpg129092.model.GameState;
 import it.unicam.cs.mpgc.rpg129092.model.actions.CombatAction;
-import it.unicam.cs.mpgc.rpg129092.model.characters.Hero;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.util.Duration;
-import it.unicam.cs.mpgc.rpg129092.controller.battle.BattleController;
 import it.unicam.cs.mpgc.rpg129092.model.actions.AttackAction;
 import it.unicam.cs.mpgc.rpg129092.model.actions.CureAction;
 
@@ -53,7 +51,7 @@ public class BattleFXController {
         // 3. Disabilita l'input e passa il turno al nemico
         setControlsDisabled(true);
 
-        PauseTransition enemyDelay = new PauseTransition(Duration.seconds(3.0));
+        PauseTransition enemyDelay = new PauseTransition(Duration.seconds(2.0));
         enemyDelay.setOnFinished(event -> {
             // Esegui la mossa dell'I.A. del nemico nel Model
             String enemyResult = battleEngine.handleEnemyTurn();
@@ -89,11 +87,10 @@ public class BattleFXController {
         enemyHpBar.setProgress(enemyProgress);
 
         if (battleEngine.getCurrentState() == BattleController.BattleState.VICTORY) {
-            // Dopo 3 secondi dalla vittoria, torna automaticamente alla selezione nemici
-            PauseTransition returnDelay = new PauseTransition(Duration.seconds(3.0));
+            // Dopo 2 secondi dalla vittoria, torna automaticamente alla selezione nemici
+            PauseTransition returnDelay = new PauseTransition(Duration.seconds(2));
             returnDelay.setOnFinished(event -> {
-                // Passiamo l'eroe (castato da AbstractCharacter) allo SceneManager
-                Hero currentHero = (Hero) battleEngine.getHero();
+                // Passiamo il gameState allo SceneManager
                 SceneController.getInstance().navigateToEnemySelection(gameState);
             });
             returnDelay.play();
@@ -108,6 +105,6 @@ public class BattleFXController {
     private void endMatch(String finalMessage) {
         logLabel.setText(finalMessage);
         setControlsDisabled(true);
-        // In futuro qui potrai dire allo SceneManager di caricare la schermata di Game Over
+        // In futuro qui si potrà dire allo SceneManager di caricare la schermata di Game Over
     }
 }

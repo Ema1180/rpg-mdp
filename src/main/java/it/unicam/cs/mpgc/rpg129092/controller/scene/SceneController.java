@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import it.unicam.cs.mpgc.rpg129092.model.GameState;
 import it.unicam.cs.mpgc.rpg129092.model.characters.AbstractCharacter;
 import it.unicam.cs.mpgc.rpg129092.controller.battle.BattleController;
-import it.unicam.cs.mpgc.rpg129092.view.BattleFXController;
+import it.unicam.cs.mpgc.rpg129092.controller.battle.BattleFXController;
 import java.io.IOException;
 
 public class SceneController {
@@ -43,8 +43,8 @@ public class SceneController {
 
     /**
      * Passo all'interfaccia di combattimento mantenendo lo stato di gioco
-     * @param gameState
-     * @param enemy
+     * @param gameState lo stato attuale di gioco
+     * @param enemy il nemico da combattere
      */
     public void startBattle(GameState gameState, AbstractCharacter enemy) {
         try {
@@ -68,7 +68,7 @@ public class SceneController {
 
     /**
      * Passo al menu di selezione del nemico dopo un combattimento
-     * @param gameState
+     * @param gameState lo stato attuale di gioco
      */
     public void navigateToEnemySelection(GameState gameState) {
         try {

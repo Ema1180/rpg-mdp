@@ -20,6 +20,8 @@ public class BattleController {
     public BattleController(Hero hero, AbstractCharacter enemy) {
         this.hero = hero;
         this.enemy = enemy;
+        hero.setHP(hero.getMaxHealth());
+        enemy.setHP(enemy.getMaxHealth()); //Curo sia l'eroe che il nemico per ricominciare il combattimento da capo
         this.currentState = BattleState.HERO_TURN; // Inizia l'eroe di default
     }
 
@@ -37,7 +39,7 @@ public class BattleController {
         // Verifico lo stato del combattimento
         if (enemy.isDead()) {
             currentState = BattleState.VICTORY;
-            hero.levelUp(); //Faccio salire di livello il giocatore dopo ogni combattimento vinto per semplicità
+            hero.levelUp(enemy.getExp()); //Faccio salire di livello il giocatore
             return logResult + "\n" + enemy.getName() + " è stato gonfiato di botte! ";
         }
 

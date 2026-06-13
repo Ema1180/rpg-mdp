@@ -1,7 +1,5 @@
 package it.unicam.cs.mpgc.rpg129092.controller.scene;
-import it.unicam.cs.mpgc.rpg129092.controller.battle.BattleController;
 import it.unicam.cs.mpgc.rpg129092.controller.saving.JsonSaver;
-import it.unicam.cs.mpgc.rpg129092.model.characters.Hero;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,7 +22,7 @@ public class EnemySelectionController {
         startButton.setDisable(true);
 
         // Gestisce l'attivazione del pulsante di scontro
-        enemyListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        enemyListView.getSelectionModel().selectedItemProperty().addListener((newValue) -> {
             startButton.setDisable(newValue == null);
         });
     }
@@ -53,10 +51,6 @@ public class EnemySelectionController {
     public void onStartClick() {
         AbstractCharacter selectedEnemy = enemyListView.getSelectionModel().getSelectedItem();
         if (selectedEnemy == null || gameState == null) return;
-
-        Hero hero = gameState.getHero();
-        BattleController battleController = new BattleController(hero, selectedEnemy);
-
         // Avvia il combattimento passando lo stato corrente e il bersaglio scelto
         SceneController.getInstance().startBattle(gameState, selectedEnemy);
     }

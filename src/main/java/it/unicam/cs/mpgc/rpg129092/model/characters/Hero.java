@@ -1,7 +1,6 @@
 package it.unicam.cs.mpgc.rpg129092.model.characters;
 
 public class Hero extends AbstractCharacter {
-    private int exp;
     private int level;
 
     public Hero(String name) {
@@ -15,7 +14,8 @@ public class Hero extends AbstractCharacter {
         target.takeDamage(this.attackpower);
     }
 
-    public void levelUp() {
+    public void levelUp(int experience) {
+        this.exp += experience;
         if (exp >= level) {
             level++;
             maxHealth += 25;
