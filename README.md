@@ -13,8 +13,8 @@ Il loop principale del gioco consiste nel scegliere il nemico che si vuole comba
 ### Istruzioni
 
 ```bash
-git clone <url-del-repository>
-cd <nome-cartella>
+git clone <https://github.com/Ema1180/rpg-mdp>
+cd <rpg-mdp>
 ```
 
 ### Build del progetto
