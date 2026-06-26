@@ -13,8 +13,24 @@ public class MainMenuController {
 
     @FXML private Button continueButton;
 
-    private final GameSaver gameSaver = new JsonSaver();
+    private SceneController sceneController;
+    private GameSaver gameSaver;
     private final String savePath = "savegame.json";
+
+    public MainMenuController() {
+        this.gameSaver = new JsonSaver();
+    }
+
+    /**
+     * Questo metodo permette a SceneController di iniettare se stesso
+     * subito dopo il caricamento dell'FXML.
+     */
+    public void setSceneController(SceneController sceneController) {
+        this.sceneController = sceneController;
+    }
+    public void setGameSaver(GameSaver gameSaver) {
+        this.gameSaver = gameSaver;
+    }
 
     @FXML
     private void initialize() {
@@ -26,11 +42,10 @@ public class MainMenuController {
 
     @FXML
     private void onNewGameClick() {
+
         Hero eroe = new Hero("Geralt");
-
         GameState gameState = new GameState(eroe);
-
-        SceneController.getInstance().navigateToEnemySelection(gameState);
+        sceneController.navigateToNameSelection(gameState);
     }
 
     @FXML
@@ -38,12 +53,17 @@ public class MainMenuController {
         try {
             GameState gameState = gameSaver.load(savePath);
 
-            if (gameState != null) {
+            if (gameState != null && sceneController != null) {
                 System.out.println("Salvataggio caricato");
-                SceneController.getInstance().navigateToEnemySelection(gameState);
+                sceneController.navigateToEnemySelection(gameState);
             }
-        }  catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Errore durante il caricamento");
         }
+    }
+
+    @FXML
+    private void onExitClick() {
+        System.exit(0);
     }
 }

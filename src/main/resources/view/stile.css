@@ -1,0 +1,209 @@
+/* Registrazione del primo font */
+@font-face {
+    font-family: 'Angelic War';
+    src: url('fonts/AngelicWar.ttf');
+}
+
+/* Registrazione del secondo font */
+@font-face {
+    font-family: 'Bleeding Cowboys';
+    src: url('fonts/Bleeding_Cowboys.ttf');
+}
+
+/* Per il Titolo del Menu Principale */
+.game-title {
+    -fx-font-family: 'Angelic War';
+    -fx-font-size: 54px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(#ffe082, #a17624);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.9), 10, 0.5, 0, 4);
+    -fx-padding: 0 0 30px 0;
+}
+
+/* Per il Titolo della Selezione Nome */
+.game-title-name {
+    -fx-font-family: 'Bleeding Cowboys';
+    -fx-font-size: 44px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(#ffffff, #ffe082);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.9), 10, 0.5, 0, 4);
+    -fx-padding: 0 0 20px 0;
+}
+
+
+/* Lo sfondo del menu principale */
+.menu-background {
+    -fx-background-image: url("backgrounds/main-background.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-size: cover;
+    -fx-background-color: #0a0503;
+}
+
+/* Sfondo della schermata di selezione del nemico */
+.selection-background{
+    -fx-background-image: url("backgrounds/selection-background.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center center;
+    -fx-background-size: cover;
+    -fx-background-color: #0a0503;
+}
+
+.battle-background{
+    -fx-background-image: url("backgrounds/battle-background.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center center;
+    -fx-background-size: cover;
+    -fx-background-color: #0a0503;
+}
+
+/* Lo stile base dei pulsanti del Menu */
+.menu-button {
+    -fx-background-color: linear-gradient(#4a2f13, #2b1a08),
+    linear-gradient(#c2913f, #5e4113);
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 8, 6;
+
+    -fx-text-fill: #f3e6d0;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 12px 30px;
+    -fx-min-width: 220px;
+
+    /* Ombra sotto il pulsante per dargli profondità */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 8, 0, 0, 4);
+}
+
+/* Quando il giocatore passa il mouse sopra il pulsante (Hover) */
+.menu-button:hover {
+    -fx-background-color: linear-gradient(#613f1c, #3b240d),
+    linear-gradient(#e6b35e, #805b1d);
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+
+    -fx-effect: dropshadow(three-pass-box, rgba(194, 145, 63, 0.6), 15, 0, 0, 0);
+}
+
+/* Quando il giocatore clicca il pulsante */
+.menu-button:focused, .menu-button:pressed {
+    /* Sposta leggermente l'ombra per simulare la pressione */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 1);
+}
+
+/* Stile per il campo di testo (Input del Nome) */
+.rpg-textfield {
+    -fx-background-color: rgba(26, 18, 12, 0.85);
+    -fx-border-color: #a17624;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+
+    -fx-text-fill: #ffe082;
+    -fx-prompt-text-fill: #8c6d36;
+
+    -fx-font-family: 'Georgia';
+    -fx-font-size: 18px;
+    -fx-padding: 10px 20px;
+
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* Quando il giocatore clicca dentro la casella di testo */
+.rpg-textfield:focused {
+    -fx-border-color: #ffe082;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 224, 130, 0.3), 10, 0, 0, 0);
+}
+
+/* Contenitore esterno della lista dei mostri */
+.rpg-list-view {
+    -fx-background-color: rgba(26, 18, 12, 0.85);
+    -fx-border-color: #a17624;
+    -fx-border-width: 2px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 5px;
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.9), 15, 0, 0, 0);
+}
+
+/* Stile base delle singole righe (Mostri) */
+.rpg-list-view .list-cell {
+    -fx-background-color: transparent; /* Sfondo trasparente per far vedere il pannello sotto */
+    -fx-text-fill: #f3e6d0;
+    -fx-font-family: 'Georgia';
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 20px;
+    -fx-border-color: rgba(161, 118, 36, 0.15);
+    -fx-border-width: 0 0 1px 0;
+}
+
+/* Quando passi il mouse sopra una riga della lista (Hover) */
+.rpg-list-view .list-cell:hover {
+    -fx-background-color: rgba(161, 118, 36, 0.2);
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+}
+
+/* Quando selezioni attivamente un mostro cliccandoci sopra */
+.rpg-list-view .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#4a2f13, #2b1a08);
+    -fx-text-fill: #ffe082;
+    -fx-border-color: #a17624;
+    -fx-border-width: 1px;
+}
+
+/* Rende trasparente lo sfondo degli angoli morti della barra di scorrimento */
+.rpg-list-view .corner {
+    -fx-background-color: transparent;
+}
+
+/* Nomi dei combattenti */
+.battle-character-name {
+    -fx-font-family: 'Georgia';
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffe082;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.9), 6, 0.5, 0, 2);
+}
+
+/* Registro degli eventi di gioco (Log) trasformato in pergamena scura */
+.battle-log-box {
+    -fx-background-color: rgba(26, 18, 12, 0.85);
+    -fx-border-color: #a17624;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+
+    -fx-font-family: 'Georgia';
+    -fx-font-size: 16px;
+    -fx-text-fill: #f3e6d0;
+    -fx-padding: 15px;
+
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* STILIZZAZIONE DELLE BARRE DELLA SALUTE */
+
+/* Contenitore/Bordo della barra */
+.rpg-hp-bar {
+    -fx-background-color: linear-gradient(#4a2f13, #2b1a08), linear-gradient(#c2913f, #5e4113);
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 4;
+    -fx-padding: 2px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 2);
+}
+
+/* Lo sfondo vuoto della barra */
+.rpg-hp-bar .track {
+    -fx-background-color: #1a0f08;
+    -fx-background-radius: 3;
+}
+
+/* Il riempimento della barra */
+.rpg-hp-bar .bar {
+    -fx-background-color: linear-gradient(to bottom, #bd2424, #730e0e);
+    -fx-background-radius: 3;
+    -fx-background-insets: 0;
+}

@@ -22,8 +22,18 @@ public class BattleFXController {
     @FXML private Label heroName;
     @FXML private Label enemyName;
 
+    // Riferimento locale allo SceneController iniettato dall'esterno
+    private SceneController sceneController;
     private BattleController battleEngine;
     private GameState gameState;
+
+    /**
+     * Permette a SceneController di iniettare se stesso
+     * al momento della creazione del contesto di battaglia.
+     */
+    public void setSceneController(SceneController sceneController) {
+        this.sceneController = sceneController;
+    }
 
     @FXML
     public void onAttackClick() {
@@ -44,11 +54,11 @@ public class BattleFXController {
 
         // Controlla se l'eroe ha vinto
         if (battleEngine.isBattleOver()) {
-            endMatch("VITTORIA!");
-            return;
+            endMatch("VITTORIA!" + result);
+            handleEnding();
         }
 
-        // 3. Disabilita l'input e passa il turno al nemico
+        // Disabilita l'input e passa il turno al nemico
         setControlsDisabled(true);
 
         PauseTransition enemyDelay = new PauseTransition(Duration.seconds(2.0));
@@ -60,6 +70,7 @@ public class BattleFXController {
             // Controlla se il nemico ha vinto
             if (battleEngine.isBattleOver()) {
                 endMatch("Oggi vince il male...");
+                handleEnding();
             } else {
                 // Riapri i controlli per il nuovo turno dell'eroe
                 setControlsDisabled(false);
@@ -85,13 +96,27 @@ public class BattleFXController {
 
         heroHpBar.setProgress(heroProgress);
         enemyHpBar.setProgress(enemyProgress);
+    }
 
+    /**
+     * Si occupa di pianificare il ritorno alla schermata di selezione nemici o di game over.
+     */
+    private void handleEnding() {
         if (battleEngine.getCurrentState() == BattleController.BattleState.VICTORY) {
             // Dopo 2 secondi dalla vittoria, torna automaticamente alla selezione nemici
             PauseTransition returnDelay = new PauseTransition(Duration.seconds(2));
             returnDelay.setOnFinished(event -> {
-                // Passiamo il gameState allo SceneManager
-                SceneController.getInstance().navigateToEnemySelection(gameState);
+                if (sceneController != null) {
+                    sceneController.navigateToEnemySelection(gameState);
+                }
+            });
+            returnDelay.play();
+        } else if (battleEngine.getCurrentState() == BattleController.BattleState.DEFEAT) {
+            PauseTransition returnDelay = new PauseTransition(Duration.seconds(2));
+            returnDelay.setOnFinished(event -> {
+                if (sceneController != null) {
+                    sceneController.showMainMenu();
+                }
             });
             returnDelay.play();
         }
@@ -105,6 +130,5 @@ public class BattleFXController {
     private void endMatch(String finalMessage) {
         logLabel.setText(finalMessage);
         setControlsDisabled(true);
-        // In futuro qui si potrà dire allo SceneManager di caricare la schermata di Game Over
     }
 }

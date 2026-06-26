@@ -1,12 +1,12 @@
 package it.unicam.cs.mpgc.rpg129092.model.characters;
 
 public class Enemy extends AbstractCharacter {
-    private final int exp;
+    private final int expReward;
 
 
     public Enemy (String name,int health, int attackpower, int exp) {
         super(name, health, attackpower);
-        this.exp = exp;
+        this.expReward = exp;
     }
 
     @Override
@@ -20,6 +20,6 @@ public class Enemy extends AbstractCharacter {
     }
 
     public int getExp() {
-        return exp;
+        return expReward;
     }
 }

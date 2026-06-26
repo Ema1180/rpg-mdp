@@ -4,8 +4,7 @@ public abstract class AbstractCharacter implements GameEntity {
     protected String name;
     protected int health;
     protected int maxHealth;
-    protected int attackpower;
-    protected int exp;
+    protected int attackpower;;
 
     public AbstractCharacter (String name, int maxHealth, int attackpower) {
         this.name = name;
@@ -50,8 +49,4 @@ public abstract class AbstractCharacter implements GameEntity {
     }
 
     public abstract void attack(GameEntity target);
-
-    public int getExp(){
-        return exp;
-    }
 }

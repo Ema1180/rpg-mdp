@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpg129092.controller.battle;
 import it.unicam.cs.mpgc.rpg129092.model.actions.AttackAction;
 import it.unicam.cs.mpgc.rpg129092.model.characters.AbstractCharacter;
 import it.unicam.cs.mpgc.rpg129092.model.actions.CombatAction;
+import it.unicam.cs.mpgc.rpg129092.model.characters.Enemy;
 import it.unicam.cs.mpgc.rpg129092.model.characters.Hero;
 
 public class BattleController {
@@ -14,10 +15,10 @@ public class BattleController {
     }
 
     private final Hero hero;
-    private final AbstractCharacter enemy;
+    private final Enemy enemy;
     private BattleState currentState;
 
-    public BattleController(Hero hero, AbstractCharacter enemy) {
+    public BattleController(Hero hero, Enemy enemy) {
         this.hero = hero;
         this.enemy = enemy;
         hero.setHP(hero.getMaxHealth());
@@ -39,11 +40,16 @@ public class BattleController {
         // Verifico lo stato del combattimento
         if (enemy.isDead()) {
             currentState = BattleState.VICTORY;
+            logResult = " " + enemy.getName() + " è stato gonfiato di schiaffi!";
+            int oldLevel= hero.getLevel();
             hero.levelUp(enemy.getExp()); //Faccio salire di livello il giocatore
-            return logResult + "\n" + enemy.getName() + " è stato gonfiato di botte! ";
+            if (hero.getLevel() > oldLevel) {
+                logResult += "\n Sei salito di livello!";
+            }
+            return logResult;
         }
 
-        // Passa il turno al nemico
+        // Passo il turno al nemico
         currentState = BattleState.ENEMY_TURN;
         return logResult;
     }

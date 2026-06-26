@@ -1,28 +1,43 @@
 package it.unicam.cs.mpgc.rpg129092.controller.scene;
-import it.unicam.cs.mpgc.rpg129092.controller.saving.JsonSaver;
+
+import it.unicam.cs.mpgc.rpg129092.controller.saving.GameSaver;
+import it.unicam.cs.mpgc.rpg129092.model.characters.Enemy;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import it.unicam.cs.mpgc.rpg129092.model.GameState;
-import it.unicam.cs.mpgc.rpg129092.model.characters.AbstractCharacter;
 
 import java.io.IOException;
 
 public class EnemySelectionController {
 
-    @FXML private ListView<AbstractCharacter> enemyListView;
+    @FXML private ListView<Enemy> enemyListView;
     @FXML private Button startButton;
 
+    // Riferimento locale allo SceneController iniettato dall'esterno
+    private SceneController sceneController;
     private GameState gameState;
+
+    //Riferimento al GameSaver per la persistenza
+    private  GameSaver gameSaver;
+    private final String savePath = "savegame.json";
+
+    /**
+     * Questo metodo permette a SceneController di iniettare se stesso
+     * subito dopo il caricamento della vista.
+     */
+    public void setSceneController(SceneController sceneController) {
+        this.sceneController = sceneController;
+    }
 
     @FXML
     public void initialize() {
         startButton.setDisable(true);
 
         // Gestisce l'attivazione del pulsante di scontro
-        enemyListView.getSelectionModel().selectedItemProperty().addListener((newValue) -> {
+        enemyListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             startButton.setDisable(newValue == null);
         });
     }
@@ -34,30 +49,37 @@ public class EnemySelectionController {
         this.gameState = gameState;
 
         if (gameState != null) {
-            // Prendiamo la lista dei superstiti dal Model e la impacchettiamo per JavaFX
-            ObservableList<AbstractCharacter> observableEnemies =
-                    FXCollections.observableArrayList(gameState.getEnemies());
+            ObservableList<Enemy> observableEnemies = FXCollections.observableArrayList(gameState.getEnemies());
 
             enemyListView.setItems(observableEnemies);
-
-            // Controllo extra: se non ci sono più nemici, l'utente ha vinto il gioco!
-            if (gameState.getEnemies().isEmpty()) {
-                // Gestisci la vittoria totale del gioco (es. mostra un messaggio o i crediti)
-            }
         }
     }
 
     @FXML
     public void onStartClick() {
-        AbstractCharacter selectedEnemy = enemyListView.getSelectionModel().getSelectedItem();
+        Enemy selectedEnemy = enemyListView.getSelectionModel().getSelectedItem();
         if (selectedEnemy == null || gameState == null) return;
-        // Avvia il combattimento passando lo stato corrente e il bersaglio scelto
-        SceneController.getInstance().startBattle(gameState, selectedEnemy);
+
+        // Utilizziamo l'istanza dello SceneController iniettata
+        if (sceneController != null) {
+            var battleEngine = new it.unicam.cs.mpgc.rpg129092.controller.battle.BattleController(gameState.getHero(), selectedEnemy);
+            sceneController.startBattle(gameState, battleEngine);
+        }
     }
 
     @FXML
-    public void onSaveClick() throws IOException {
-        JsonSaver saver = new JsonSaver();
-        saver.save(gameState, "savegame.json");
+    public void onSaveClick() {
+        try {
+            if (gameState != null && gameSaver != null) {
+                gameSaver.save(gameState, savePath);
+                System.out.println("Gioco salvato con successo.");
+            }
+        } catch (IOException e) {
+            System.err.println("Errore durante il salvataggio: " + e.getMessage());
+        }
+    }
+
+    public void setGameSaver(GameSaver gameSaver) {
+        this.gameSaver = gameSaver;
     }
 }

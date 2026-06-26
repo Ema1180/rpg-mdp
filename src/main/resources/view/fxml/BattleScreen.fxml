@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" spacing="10.0" styleClass="battle-background" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg129092.controller.battle.BattleFXController">
+   <children>
+      <HBox alignment="CENTER" prefWidth="1000.0" spacing="150.0">
+         <children>
+
+            <VBox alignment="TOP_LEFT" spacing="8.0">
+               <children>
+                  <Label fx:id="heroName" styleClass="battle-character-name" text="Hero" />
+                  <ProgressBar fx:id="heroHpBar" prefWidth="250.0" progress="0.6" styleClass="rpg-hp-bar" />
+               </children>
+            </VBox>
+
+            <VBox alignment="TOP_RIGHT" spacing="8.0">
+               <children>
+                  <Label fx:id="enemyName" styleClass="battle-character-name" text="Enemy" />
+                  <ProgressBar fx:id="enemyHpBar" prefWidth="250.0" progress="0.8" styleClass="rpg-hp-bar" />
+               </children>
+            </VBox>
+
+         </children>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </HBox>
+
+      <Region VBox.vgrow="ALWAYS" />
+
+      <VBox alignment="CENTER" maxWidth="800.0" spacing="20.0">
+         <children>
+
+            <Label fx:id="logLabel" maxWidth="800.0" minHeight="60.0" styleClass="battle-log-box" text="Il Goblin avanza minaccioso! Tocca a te." wrapText="true" />
+
+            <HBox alignment="CENTER" spacing="40.0">
+               <children>
+                  <Button fx:id="attackButton" mnemonicParsing="false" onAction="#onAttackClick" styleClass="menu-button" text="Attacca" />
+                  <Button fx:id="healButton" mnemonicParsing="false" onAction="#onHealClick" styleClass="menu-button" text="Curati" />
+               </children>
+            </HBox>
+
+         </children>
+         <VBox.margin>
+            <Insets bottom="40.0" />
+         </VBox.margin>
+      </VBox>
+
+   </children>
+</VBox>

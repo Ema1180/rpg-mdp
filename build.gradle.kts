@@ -1,37 +1,45 @@
 plugins {
     java
     application
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
-
-group = "it.unicam.cs.mpgc"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    val javafxVersion = "21"
-    val platform = "win"
 
-    // Importiamo i moduli di JavaFX come normali librerie
-    implementation("org.openjfx:javafx-controls:$javafxVersion:$platform")
-    implementation("org.openjfx:javafx-fxml:$javafxVersion:$platform")
-    implementation("org.openjfx:javafx-graphics:$javafxVersion:$platform")
-    implementation("org.openjfx:javafx-base:$javafxVersion:$platform")
+    implementation("com.google.code.gson:gson:2.13.2")
 
-    // Supporto per i test unitari JUnit 5
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+    implementation("org.openjfx:javafx-controls:25.0.3")
+    implementation("org.openjfx:javafx-fxml:25.0.3")
+    implementation("org.openjfx:javafx-web:25.0.3")
+
+    testImplementation(platform("org.junit:junit-bom:6.0.3"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
 
-    // Libreria per il salvataggio dei dati (Persistenza)
-    implementation("com.google.code.gson:gson:2.10.1")
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
+javafx {
+    version = "25.0.3"
+    modules = listOf("javafx.controls", "javafx.fxml", "javafx.web")
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
 }
 
 application {
-    mainClass.set("it.unicam.cs.mpgc.rpg129092.Main")
+    mainClass = "it.unicam.cs.mpgc.rpg129092.Main"
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
